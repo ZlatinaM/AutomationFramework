@@ -13,19 +13,17 @@ public class ListViewPage {
     @FindBy(xpath = "//article[@class='card-list-item']")
     List<WebElement> listResults;
 
-    public ListViewPage(){
+    public ListViewPage() {
         PageFactory.initElements(SelenuimDriver.getDriver(), this);
     }
 
-    public String getPageTitle(){
+    public String getPageTitle() {
         return SelenuimDriver.getDriver().getTitle();
 
-
     }
 
-    public void verifyResultList(int expectedResult){
+    public void verifyResultList(int expectedResult) {
         Assert.assertEquals(listResults.size(), expectedResult);
     }
-
 
 }

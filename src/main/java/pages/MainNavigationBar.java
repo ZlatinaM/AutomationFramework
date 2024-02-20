@@ -8,19 +8,25 @@ import utils.SelenuimDriver;
 
 public class MainNavigationBar {
 
-    public MainNavigationBar(){
+    public MainNavigationBar() {
         PageFactory.initElements(SelenuimDriver.getDriver(), this);
     }
 
-    @FindBy(xpath = "//nav[@class='main-nav']//a[text()='Продажба']")
+    @FindBy(xpath = "//a[@data-container='PropertySale']")
     public WebElement saleButton;
 
-    @FindBy(xpath = "//nav[@class='main-nav']//a[text()='Наем']")
-    public WebElement rentButton;
+    @FindBy(xpath = "//li[@id='creditCalculator']/a")
+    public WebElement creditCalculatorButton;
 
-    public SalesPage navigateToSalePage(){
+
+    public SalesPage navigateToSalePage() {
         saleButton.click();
         return new SalesPage();
+    }
+
+    public CreditCalculatorPage navigateToCreditCalculator() {
+        creditCalculatorButton.click();
+        return new CreditCalculatorPage();
     }
 
 }

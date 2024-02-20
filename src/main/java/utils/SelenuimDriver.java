@@ -15,7 +15,7 @@ public class SelenuimDriver {
 
     private static WebDriver driver;
 
-    private SelenuimDriver(){
+    private SelenuimDriver() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -23,35 +23,27 @@ public class SelenuimDriver {
 
     }
 
-    public static void openPage(String url){
+    public static void openPage(String url) {
         driver.get(url);
     }
 
-    public static WebDriver getDriver(){
+    public static WebDriver getDriver() {
         return driver;
     }
 
-    public static void setUpDriver(){
-        if (selenuimDriver == null){
+    public static void setUpDriver() {
+        if (selenuimDriver == null) {
             selenuimDriver = new SelenuimDriver();
         }
     }
 
-    public static void tearDown(){
-        if (driver != null){
+    public static void tearDown() {
+        if (driver != null) {
             driver.close();
             driver.quit();
         }
         selenuimDriver = null;
     }
-
-    public static void waitUntilElementIsClickable(By locator){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-
-    }
-
-
 
 
 }

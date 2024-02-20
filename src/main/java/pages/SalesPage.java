@@ -14,23 +14,24 @@ import java.util.List;
 
 public class SalesPage {
 
-    public SalesPage(){
+    public SalesPage() {
         PageFactory.initElements(SelenuimDriver.getDriver(), this);
     }
 
-    @FindBy(xpath = "//input[@placeholder='Тип имот']")
+
+    @FindBy(xpath = "//div[@data-search-field='property-type']/div/input")
     public WebElement propertyType;
 
-    @FindBy(xpath = "//input[@placeholder='Квартали']")
+    @FindBy(xpath = "//div[@data-search-field='quarters']/div/input")
     public WebElement districts;
 
-    @FindBy(xpath = "//input[@placeholder='Цена']")
+    @FindBy(xpath = "//div[@data-search-field='price-search']/div/input")
     public WebElement priceTab;
 
     @FindBy(xpath = "//input[@name='PropertyMaxPrice']")
     public WebElement maxPriceField;
 
-    @FindBy(xpath = "//input[@placeholder='Площ']")
+    @FindBy(xpath = "//a[@id='area-search-trigger']")
     public WebElement area;
 
     @FindBy(xpath = "//input[@data-search-field='area-from']")
@@ -42,37 +43,36 @@ public class SalesPage {
     @FindBy(xpath = "//div[@class='search-results-map-holder custom-class']/div")
     public List<WebElement> results;
 
-    @FindBy(xpath = "//div[@class='aside-holder']//a[@title='Списък']")
+    @FindBy(xpath = "//div[@class='aside-holder']//a[@data-mode='list']")
     public WebElement listButton;
 
 
-    public void selectPropertyType(){
+    public void selectPropertyType() {
         waitUntilResultsAreLoaded(30);
         propertyType.click();
 
     }
 
-    public void selectTypeOfApartment(String type){
-        SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@value ='"+type+"']/following-sibling::ins")).click();
+    public void selectTypeOfApartment(String type) {
+        SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@value ='" + type + "']/following-sibling::ins")).click();
     }
 
-    public void clickOnDistrictTab(){
+    public void clickOnDistrictTab() {
         districts.click();
     }
 
-    public void selectDistrictName(String name){
-        SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@data-quarter ='"+name+"']/following-sibling::ins")).click();
+    public void selectDistrictName(String name) {
+        SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@data-quarter ='" + name + "']/following-sibling::ins")).click();
     }
 
     public void selectMinPrice(String minPrice) {
         priceTab.click();
-        //SelenuimDriver.waitUntilElementIsClickable(By.xpath("//ul[@class='min-price price']//li[@data-value='"+minPrice+"']"));
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@class='min-price price']//li[@data-value='"+minPrice+"']")).click();
+        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@class='min-price price']//li[@data-value='" + minPrice + "']")).click();
     }
 
-    public void selectMaxPrice(String maxPrice)   {
+    public void selectMaxPrice(String maxPrice) {
         maxPriceField.click();
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@class ='max-price price']//li[@data-value='"+maxPrice+"']")).click();
+        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@class ='max-price price']//li[@data-value='" + maxPrice + "']")).click();
     }
 
     public void selectMinArea(String minArea) {
@@ -81,17 +81,18 @@ public class SalesPage {
         SelenuimDriver.getDriver().findElement(By.xpath("//ul[@data-search-options='area-from']/li[@data-value='" + minArea + "']")).click();
     }
 
-    public void selectMaxArea(String maxArea){
+    public void selectMaxArea(String maxArea) {
         maxAreaField.click();
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@data-search-options='area-to']/li[@data-value='"+maxArea+"']")).click();
+        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@data-search-options='area-to']/li[@data-value='" + maxArea + "']")).click();
 
     }
+
     public boolean areResultsDisplayed() {
         waitUntilResultsAreLoaded(30);
         return !results.isEmpty();
     }
 
-    public void waitUntilResultsAreLoaded(int time){
+    public void waitUntilResultsAreLoaded(int time) {
         WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class='results-loading']"), 1));
     }
@@ -103,49 +104,36 @@ public class SalesPage {
         return SelenuimDriver.getDriver().findElement(By.xpath("//div[@id='list-results']/preceding-sibling::h2/strong")).getText();
     }
 
-    public boolean verifyInformationIsFilteredCorrectlyBasedOnPrice() throws InterruptedException {
+    public boolean verifyInformationIsFilteredCorrectlyBasedOnPrice() {
         boolean pricesMatch = false;
         WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class='estate-details']/span"), 3));
 
         List<Integer> listPrices = new ArrayList<>();
         List<WebElement> prices = SelenuimDriver.getDriver().findElements(By.xpath("//div[@class='estate-details']/span"));
-        for (int i = 0; i<prices.size(); i++){
+        for (int i = 0; i < prices.size(); i++) {
             String price = prices.get(i).getText().replaceAll("[^\\d]", "");
             int priceToInt = Integer.parseInt(price);
 
             listPrices.add(priceToInt);
 
-            for (int j=0; j<listPrices.size(); j++){
-                if (priceToInt>10000 && priceToInt<500000){
+            for (int j = 0; j < listPrices.size(); j++) {
+                if (priceToInt > 10000 && priceToInt < 500000) {
                     pricesMatch = true;
-                }else{
+                } else {
                     pricesMatch = false;
                 }
 
-                }
             }
-        return pricesMatch;
-
-
         }
+        return pricesMatch;
+    }
 
-        public ListViewPage clickOnListButton(){
+    public ListViewPage clickOnListButton() {
         listButton.click();
 
         return new ListViewPage();
-        }
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }
