@@ -46,9 +46,11 @@ public class SalesPage {
     @FindBy(xpath = "//div[@class='aside-holder']//a[@data-mode='list']")
     public WebElement listButton;
 
+    WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
+
 
     public void selectPropertyType() {
-        waitUntilResultsAreLoaded(30);
+        waitUntilResultsAreLoaded();
         propertyType.click();
 
     }
@@ -67,7 +69,8 @@ public class SalesPage {
 
     public void selectMinPrice(String minPrice) {
         priceTab.click();
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@class='min-price price']//li[@data-value='" + minPrice + "']")).click();
+        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class='min-price price']//li[@data-value='" + minPrice + "']"))).click();
     }
 
     public void selectMaxPrice(String maxPrice) {
@@ -88,17 +91,17 @@ public class SalesPage {
     }
 
     public boolean areResultsDisplayed() {
-        waitUntilResultsAreLoaded(30);
+        waitUntilResultsAreLoaded();
         return !results.isEmpty();
     }
 
-    public void waitUntilResultsAreLoaded(int time) {
-        WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
+    public void waitUntilResultsAreLoaded() {
+        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class='results-loading']"), 1));
     }
 
     public String displayedResult() {
-        WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
+        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@type='button' and @data-dismiss='alert']")));
 
         return SelenuimDriver.getDriver().findElement(By.xpath("//div[@id='list-results']/preceding-sibling::h2/strong")).getText();
@@ -106,7 +109,7 @@ public class SalesPage {
 
     public boolean verifyInformationIsFilteredCorrectlyBasedOnPrice() {
         boolean pricesMatch = false;
-        WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
+        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class='estate-details']/span"), 3));
 
         List<Integer> listPrices = new ArrayList<>();

@@ -2,7 +2,7 @@ Feature: User is able to do a search and filter the information on Sales page
 
   Background:
     Given I am on the main Yavlena page
-    When I click on Продажба button
+    When I click on Sales button
 
   Scenario: User is able to filter the information on Sales page - positive scenario
 

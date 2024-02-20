@@ -20,8 +20,8 @@ public class SearchingOnSalesPageStepDefinitions {
         SelenuimDriver.openPage("https://www.yavlena.com/broker/");
     }
 
-    @When("I click on Продажба button")
-    public void i_click_on_продажба_button() {
+    @When("I click on Sales button")
+    public void i_click_on_sales_button() {
         MainNavigationBar navigationBar = new MainNavigationBar();
         salesPage = navigationBar.navigateToSalePage();
     }
