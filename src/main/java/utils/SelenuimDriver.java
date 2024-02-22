@@ -15,7 +15,7 @@ public class SelenuimDriver {
 
     private SelenuimDriver() {
         ChromeOptions opt = new ChromeOptions();
-        opt.addArguments("incognito");
+        //opt.addArguments("incognito");
         opt.addArguments("--disable-geolocation");
         driver = new ChromeDriver(opt);
         driver.manage().window().maximize();

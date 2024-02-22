@@ -18,7 +18,6 @@ public class SalesPage {
         PageFactory.initElements(SelenuimDriver.getDriver(), this);
     }
 
-
     @FindBy(xpath = "//div[@data-search-field='property-type']/div/input")
     public WebElement propertyType;
 

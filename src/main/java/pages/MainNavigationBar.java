@@ -42,7 +42,6 @@ public class MainNavigationBar {
         sofiaCityOption.click();
     }
 
-
     public void selectLanguage(String language) {
         languageDropDown.click();
         switch (language) {
@@ -58,15 +57,13 @@ public class MainNavigationBar {
         }
     }
 
-
     public SalesPage navigateToSalePage() {
         saleButton.click();
         return new SalesPage();
     }
 
-    public CreditCalculatorPage navigateToCreditCalculator() throws InterruptedException {
+    public CreditCalculatorPage navigateToCreditCalculator() {
         creditCalculatorButton.click();
-        Thread.sleep(10000);
         return new CreditCalculatorPage();
     }
 
