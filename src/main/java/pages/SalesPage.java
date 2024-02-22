@@ -23,7 +23,7 @@ public class SalesPage {
     public WebElement propertyType;
 
     @FindBy(xpath = "//div[@data-search-field='quarters']/div/input")
-    public WebElement districts;
+    public WebElement neighborhood;
 
     @FindBy(xpath = "//div[@data-search-field='price-search']/div/input")
     public WebElement priceTab;
@@ -46,36 +46,38 @@ public class SalesPage {
     @FindBy(xpath = "//div[@class='aside-holder']//a[@data-mode='list']")
     public WebElement listButton;
 
+    @FindBy(xpath = "//div[@id='quarters-list']//label/div")
+    public List<WebElement> listOfNeighborhoods;
+
     WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
 
 
     public void selectPropertyType() {
         waitUntilResultsAreLoaded();
         propertyType.click();
-
     }
 
     public void selectTypeOfApartment(String type) {
         SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@value ='" + type + "']/following-sibling::ins")).click();
     }
 
-    public void clickOnDistrictTab() {
-        districts.click();
+    public void clickOnNeighborhoodTab() {
+        neighborhood.click();
     }
 
-    public void selectDistrictName(String name) {
-        SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@data-quarter ='" + name + "']/following-sibling::ins")).click();
+    public void selectNeighborhood() {
+        listOfNeighborhoods.get(7).click();
     }
 
     public void selectMinPrice(String minPrice) {
         priceTab.click();
-        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class='min-price price']//li[@data-value='" + minPrice + "']"))).click();
     }
 
     public void selectMaxPrice(String maxPrice) {
+        priceTab.click();
         maxPriceField.click();
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@class ='max-price price']//li[@data-value='" + maxPrice + "']")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class ='max-price price']//li[@data-value='" + maxPrice + "']"))).click();
     }
 
     public void selectMinArea(String minArea) {
@@ -96,12 +98,10 @@ public class SalesPage {
     }
 
     public void waitUntilResultsAreLoaded() {
-        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class='results-loading']"), 1));
     }
 
     public String displayedResult() {
-        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@type='button' and @data-dismiss='alert']")));
 
         return SelenuimDriver.getDriver().findElement(By.xpath("//div[@id='list-results']/preceding-sibling::h2/strong")).getText();
@@ -109,8 +109,7 @@ public class SalesPage {
 
     public boolean verifyInformationIsFilteredCorrectlyBasedOnPrice() {
         boolean pricesMatch = false;
-        //WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class='estate-details']/span"), 3));
+        waitUntilResultsAreLoaded();
 
         List<Integer> listPrices = new ArrayList<>();
         List<WebElement> prices = SelenuimDriver.getDriver().findElements(By.xpath("//div[@class='estate-details']/span"));
@@ -134,9 +133,6 @@ public class SalesPage {
 
     public ListViewPage clickOnListButton() {
         listButton.click();
-
         return new ListViewPage();
     }
-
-
 }

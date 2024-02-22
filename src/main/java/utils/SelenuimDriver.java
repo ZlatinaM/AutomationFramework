@@ -2,6 +2,7 @@ package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
@@ -11,12 +12,15 @@ public class SelenuimDriver {
 
     private static WebDriver driver;
 
+
     private SelenuimDriver() {
-        driver = new ChromeDriver();
+        ChromeOptions opt = new ChromeOptions();
+        opt.addArguments("incognito");
+        opt.addArguments("--disable-geolocation");
+        driver = new ChromeDriver(opt);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-
     }
 
     public static void openPage(String url) {
@@ -40,6 +44,5 @@ public class SelenuimDriver {
         }
         selenuimDriver = null;
     }
-
 
 }
