@@ -14,7 +14,7 @@ Additional notes:
 
 * SearchingOnSalesPage.feature file contains scenarios which have been chosen for automation due to the challanges that these kind of scenarios have, mainly related to synchronization. In a real project the tests related to filtering should rely on stable database data, otherwise there might be a lot of failures.
 
-* The tests are addaptable to all languages that the web site provides (BGN, ENG and RUS). If there is a need the tests to be run for the English localization, the parameter shoud be changed in the step which is in the background: When I select "ENG" language in the drop-down menu. The deafult district used for the test should be Sofia. If the language is BGN or RUS, "софия" should be given as a parameter to the following step in the background: And I select "софия" city in the search field. If the selected language is ENG, the parameter should be "sofia".
+* The tests are adaptable to all languages that the web site provides (BGN, ENG and RUS). If there is a need the tests to be run for the English localization, the parameter shoud be changed in the step which is in the background: When I select "ENG" language in the drop-down menu. The deafult district used for the test should be Sofia. If the language is BGN or RUS, "софия" should be given as a parameter to the following step in the background: And I select "софия" city in the search field. If the selected language is ENG, the parameter should be "sofia".
 
 * The scenarios in the CreditCalculatorTests.feature file have been chosen not because their automation value, but because in that page there are elements like sliders and iframes which can be quite challanging and I would like to exersice.
 
