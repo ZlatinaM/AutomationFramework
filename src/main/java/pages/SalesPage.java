@@ -68,15 +68,23 @@ public class SalesPage {
         listOfNeighborhoods.get(7).click();
     }
 
+    public void selectPriceTab(){
+        priceTab.click();
+    }
+
     public void selectMinPrice(String minPrice) {
         priceTab.click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class='min-price price']//li[@data-value='" + minPrice + "']"))).click();
     }
 
     public void selectMaxPrice(String maxPrice) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class ='max-price price']//li[@data-value='" + maxPrice + "']"))).click();
+    }
+
+    public void selectOnlyMaxPrice(String maxPrice) {
         priceTab.click();
         maxPriceField.click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class ='max-price price']//li[@data-value='" + maxPrice + "']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class ='max-price price']//li[@data-value='" + maxPrice + "']"))).click();
     }
 
     public void selectMinArea(String minArea) {

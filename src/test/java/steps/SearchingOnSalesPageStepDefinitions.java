@@ -59,6 +59,11 @@ public class SearchingOnSalesPageStepDefinitions {
         salesPage.selectMaxPrice(maxPrice);
     }
 
+    @When("I select only max price {string}")
+    public void i_select_only_max_price(String maxPrice) {
+        salesPage.selectOnlyMaxPrice(maxPrice);
+    }
+
     @And("I select min area {string}")
     public void i_select_min_area(String minArea) {
         salesPage.selectMinArea(minArea);

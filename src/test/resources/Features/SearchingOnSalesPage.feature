@@ -1,9 +1,10 @@
+@test
 Feature: User is able to do a search and filter the information on Sales page
 
   Background:
     Given I am on the Yavlena broker page
-    When I select "ENG" language in the drop-down menu
-    And I select "sofia" city in the search field
+    When I select "BGN" language in the drop-down menu
+    And I select "софия" city in the search field
     And I click on Sales button
 
 #  This scenario depends on the data in the data base, but it is automated just to exercise asynchronization
@@ -21,7 +22,7 @@ Feature: User is able to do a search and filter the information on Sales page
   Scenario: User is able to filter the information on Sales page - negative scenario
 
     And I select Property type "FourBedroomApartment"
-    And I select max price "20000"
+    And I select only max price "20000"
     Then on the right side of the screen there are no filtered results
 
 #  This scenario depends on the data in the data base, but in most of the cases there will be apartments in the given range
