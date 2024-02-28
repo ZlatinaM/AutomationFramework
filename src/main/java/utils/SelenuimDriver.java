@@ -1,13 +1,10 @@
 package utils;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +13,7 @@ public class SelenuimDriver {
     private static SelenuimDriver selenuimDriver;
 
     //private static WebDriver driver;
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
 
     private SelenuimDriver() {
@@ -25,9 +22,9 @@ public class SelenuimDriver {
 
         opt.addArguments("incognito");
 
-        Map<String, Object> prefs = new HashMap<String, Object>();
-        Map<String, Object> profile = new HashMap<String, Object>();
-        Map<String, Object> contentSettings = new HashMap<String, Object>();
+        Map<String, Object> prefs = new HashMap<>();
+        Map<String, Object> profile = new HashMap<>();
+        Map<String, Object> contentSettings = new HashMap<>();
 
         contentSettings.put("geolocation", 1);
         profile.put("managed_default_content_settings", contentSettings);
