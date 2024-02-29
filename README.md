@@ -18,6 +18,10 @@ Additional notes:
 
 * The scenarios in the CreditCalculatorTests.feature file have been chosen not because their automation value, but because in that page there are elements like sliders and iframes which can be quite challanging and I would like to exersice.
 
+* A screen shot is added in the cucumber report in case of failed tests
+  
+* Parallel test execution is enabled via TestNG
+
 
 
 
