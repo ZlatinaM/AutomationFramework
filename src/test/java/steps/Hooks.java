@@ -8,8 +8,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utils.SelenuimDriver;
 
-import java.io.File;
-
 public class Hooks {
 
     @Before

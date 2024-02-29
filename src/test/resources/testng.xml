@@ -1,0 +1,8 @@
+<suite name="Your Suite Name">
+    <!-- Other suite configurations -->
+    <test name="Tests" parallel="methods" thread-count="2">
+        <classes>
+            <class name="runner.TestRunner"/>
+        </classes>
+    </test>
+</suite>

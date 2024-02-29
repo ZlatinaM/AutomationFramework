@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -48,7 +49,9 @@ public class SalesPage {
     @FindBy(xpath = "//div[@id='quarters-list']//label/div")
     public List<WebElement> listOfNeighborhoods;
 
-    WebDriverWait wait = new WebDriverWait(SelenuimDriver.getDriver(), Duration.ofSeconds(30));
+    WebDriver driver = SelenuimDriver.getDriver();
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 
     public void selectPropertyType() {
@@ -57,7 +60,7 @@ public class SalesPage {
     }
 
     public void selectTypeOfApartment(String type) {
-        SelenuimDriver.getDriver().findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@value ='" + type + "']/following-sibling::ins")).click();
+        driver.findElement(By.xpath("//div[@class='icheckbox_flat-green']/input[@value ='" + type + "']/following-sibling::ins")).click();
     }
 
     public void clickOnNeighborhoodTab() {
@@ -90,12 +93,12 @@ public class SalesPage {
     public void selectMinArea(String minArea) {
         area.click();
         minAreaField.click();
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@data-search-options='area-from']/li[@data-value='" + minArea + "']")).click();
+        driver.findElement(By.xpath("//ul[@data-search-options='area-from']/li[@data-value='" + minArea + "']")).click();
     }
 
     public void selectMaxArea(String maxArea) {
         maxAreaField.click();
-        SelenuimDriver.getDriver().findElement(By.xpath("//ul[@data-search-options='area-to']/li[@data-value='" + maxArea + "']")).click();
+        driver.findElement(By.xpath("//ul[@data-search-options='area-to']/li[@data-value='" + maxArea + "']")).click();
 
     }
 
@@ -111,7 +114,7 @@ public class SalesPage {
     public String displayedResult() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@type='button' and @data-dismiss='alert']")));
 
-        return SelenuimDriver.getDriver().findElement(By.xpath("//div[@id='list-results']/preceding-sibling::h2/strong")).getText();
+        return driver.findElement(By.xpath("//div[@id='list-results']/preceding-sibling::h2/strong")).getText();
     }
 
     public boolean verifyInformationIsFilteredCorrectlyBasedOnPrice() {

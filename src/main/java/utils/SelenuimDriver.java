@@ -12,7 +12,6 @@ public class SelenuimDriver {
 
     private static SelenuimDriver selenuimDriver;
 
-    //private static WebDriver driver;
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
 
@@ -35,15 +34,9 @@ public class SelenuimDriver {
         driver.get().manage().window().maximize();
         driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.get().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-
-        /*driver = new ChromeDriver(opt);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));*/
     }
 
     public static void openPage(String url) {
-        //driver.get(url);
         driver.get().navigate().to(url);
     }
 
@@ -59,8 +52,6 @@ public class SelenuimDriver {
 
     public static void tearDown() {
         if (driver != null) {
-            /*driver.close();
-            driver.quit();*/
             driver.get().close();
             driver.get().quit();
         }

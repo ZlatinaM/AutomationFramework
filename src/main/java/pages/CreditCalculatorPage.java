@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -49,14 +50,16 @@ public class CreditCalculatorPage {
     @FindBy(css = "#pbcreditCalculator")
     public WebElement applyButton;
 
-    Actions action = new Actions(SelenuimDriver.getDriver());
+    WebDriver driver = SelenuimDriver.getDriver();
+
+    Actions action = new Actions(driver);
 
     public boolean isCreditCalculatorPageOpen() {
         return wait.until(ExpectedConditions.visibilityOf(proCreditLogo)).isDisplayed();
     }
 
     public void selectCreditAmount() {
-        SelenuimDriver.getDriver().switchTo().frame(iframe);
+        driver.switchTo().frame(iframe);
         action.dragAndDropBy(moveCreditAmountSlider, -200, 0).perform();
     }
 
@@ -69,7 +72,7 @@ public class CreditCalculatorPage {
     }
 
     public void clickOnApplyButton() {
-        SelenuimDriver.getDriver().switchTo().frame(iframe);
+        driver.switchTo().frame(iframe);
         applyButton.click();
     }
 
