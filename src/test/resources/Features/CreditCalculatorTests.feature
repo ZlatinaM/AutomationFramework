@@ -1,7 +1,7 @@
 @second
 Feature: Clicking on the credit calculator button a calculator of Pro Credit bank opens and
   user is able to calculate the monthly payments based on the amount and the term of the credit
-
+#Testing revert of pushed commit
   Background:
     Given I am on the Yavlena broker page
     When I click on Credit Calculator button
